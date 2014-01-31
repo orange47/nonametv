@@ -791,10 +791,10 @@ sub ExportNetworks
     my( $nres, $nsth ) = $ds->sa->Sql( $nquery );
     while( my $ndata = $nsth->fetchrow_hashref() )
     {
-      progress("Conax: Exporting network $ndata->{id} ($ndata->{name})");
+      progress("Conax: Exporting network $ndata->{nid} ($ndata->{name})");
 
       my $net = $odoc->createElement( 'network' );
-      $net->setAttribute( 'network-id' => $ndata->{id} );
+      $net->setAttribute( 'network-id' => $ndata->{nid} );
       $net->setAttribute( 'operator' => $ndata->{operator} );
       $net->setAttribute( 'description' => $ndata->{description} );
       $net->setAttribute( 'character-set' => $ndata->{charset} );
@@ -813,7 +813,7 @@ sub ExportNetworks
       my( $tres, $tsth ) = $ds->sa->Sql( $tquery );
       while( my $tdata = $tsth->fetchrow_hashref() )
       {
-        progress("Conax: Adding transport stream $tdata->{id} ($tdata->{description}) to network $ndata->{id}");
+        progress("Conax: Adding transport stream $tdata->{id} ($tdata->{description}) to network $ndata->{nid}");
 
         my $ts = $odoc->createElement( 'transport-stream' );
         $ts->setAttribute( 'original-network-id' => $tdata->{network} );
