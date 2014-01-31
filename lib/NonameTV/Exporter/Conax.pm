@@ -175,7 +175,7 @@ EOH
     my( $nres, $nsth ) = $ds->sa->Sql( $nquery );
     while( my $ndata = $nsth->fetchrow_hashref() )
     {
-      my $tquery = "SELECT * from transportstreams WHERE network=$ndata->{id} AND active=1";
+      my $tquery = "SELECT * from transportstreams WHERE network=$ndata->{nid} AND active=1";
       my( $tres, $tsth ) = $ds->sa->Sql( $tquery );
       while( my $tdata = $tsth->fetchrow_hashref() )
       {
@@ -809,7 +809,7 @@ sub ExportNetworks
       $lt->setAttribute( 'next-time-offset' => '120' );
       $net->appendChild( $lt );
 
-      my $tquery = "SELECT * from transportstreams WHERE network=$ndata->{id} AND active=1";
+      my $tquery = "SELECT * from transportstreams WHERE network=$ndata->{nid} AND active=1";
       my( $tres, $tsth ) = $ds->sa->Sql( $tquery );
       while( my $tdata = $tsth->fetchrow_hashref() )
       {
